@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 
 import static java.util.logging.Level.INFO;
 
-public class FrmClientes extends JFrame {
+public class FrmClientes extends JInternalFrame {
 
     private static final Logger LOG = Logger.getLogger("sv.edu.unab.agenciaviajes");
 
@@ -54,11 +54,15 @@ public class FrmClientes extends JFrame {
 
     public FrmClientes() {
         LOG.log(INFO, "[FrmClientes][INIT]");
+        this.setTitle("Clientes");
         this.setContentPane(pnlRoot);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(Utilidades.getSize());
+        this.setIconifiable(true);
+        this.setMaximizable(true);
+        this.setClosable(true);
         this.pack();
-        this.setLocationRelativeTo(null);
+//        this.setLocationRelativeTo(null);
         txtBusqueda.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -105,17 +109,18 @@ public class FrmClientes extends JFrame {
             }
         });
         btnAñadir.addActionListener(evt -> {
-            FrmClienteGestion frm = new FrmClienteGestion(null, this);
+            JFrame frmAttached = (JFrame) SwingUtilities.windowForComponent(this);
+            FrmClienteGestion frm = new FrmClienteGestion(null, frmAttached);
             frm.pack();
             frm.setVisible(true);
-            clientes = clienteCI.obtenerListado(null);
-            cargarDatos(clientes);
+//            clientes = clienteCI.obtenerListado(null);
+//            cargarDatos(clientes);
         });
         clienteCI = new ClienteCI();
         clientes = new ArrayList<>();
         filtros = new ArrayList<>();
-        clientes = clienteCI.obtenerListado(null);
-        cargarDatos(clientes);
+//        clientes = clienteCI.obtenerListado(null);
+//        cargarDatos(clientes);
     }
 
     private void createUIComponents() {
@@ -252,25 +257,32 @@ public class FrmClientes extends JFrame {
                 return str.toString();
             }).ifPresent(f -> modeloLista.addElement(f));
             lstFiltros.setModel(modeloLista);
-            clientes = clienteCI.obtenerListado(filtros);
-            cargarDatos(clientes);
+//            clientes = clienteCI.obtenerListado(filtros);
+//            cargarDatos(clientes);
         }
     }
 
     private void onEditar(Cliente cliente) {
         LOG.log(INFO, "[FrmClientes][onEditar] -> {0}", new Object[]{cliente});
-        FrmClienteGestion frm = new FrmClienteGestion(cliente, this);
+        JFrame frmAttached = (JFrame) SwingUtilities.windowForComponent(this);
+        FrmClienteGestion frm = new FrmClienteGestion(cliente, frmAttached);
         frm.pack();
         frm.setVisible(true);
-        clientes = clienteCI.obtenerListado(null);
-        cargarDatos(clientes);
+//        clientes = clienteCI.obtenerListado(null);
+//        cargarDatos(clientes);
     }
 
     private void onEliminar(Cliente cliente) {
         LOG.log(INFO, "[FrmClientes][onEliminar] -> {0}", new Object[]{cliente});
-        clienteCI.eliminarCliente(cliente);
-        clientes = clienteCI.obtenerListado(null);
-        cargarDatos(clientes);
+        StringJoiner strMsg = new StringJoiner(" ", "¿", "?");
+        strMsg.add("Estas seguro de eliminar al cliente");
+        strMsg.add(cliente.toString());
+        int respuesta = JOptionPane.showConfirmDialog(this, strMsg, "Eliminacion de Clientes", JOptionPane.YES_NO_OPTION);
+        if(respuesta == JOptionPane.YES_OPTION) {
+//            clienteCI.eliminarCliente(cliente);
+//            clientes = clienteCI.obtenerListado(null);
+            cargarDatos(clientes);
+        }
     }
 
 }

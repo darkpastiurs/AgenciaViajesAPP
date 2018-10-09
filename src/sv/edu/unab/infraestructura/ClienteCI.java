@@ -12,7 +12,7 @@ import static java.util.logging.Level.INFO;
 
 public class ClienteCI {
 
-    private ClienteCN clienteCN = new ClienteCN();
+    /*private ClienteCN clienteCN = new ClienteCN();
     private static final Logger LOG = Logger.getLogger("sv.edu.unab.agenciaviajes");
 
     public List<Cliente> obtenerListado(List<Filtro> filtros){
@@ -33,6 +33,6 @@ public class ClienteCI {
     public void eliminarCliente(Cliente cliente){
         LOG.log(INFO, "[ClienteCI][eliminarCliente] -> {0}", new Object[]{cliente});
         clienteCN.eliminar.accept(cliente);
-    }
+    }*/
 
 }

@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class PersonaCN {
 
-    private static final Logger LOG = Logger.getLogger("sv.edu.unab.agenciaviajes");
+    /*private static final Logger LOG = Logger.getLogger("sv.edu.unab.agenciaviajes");
 
     public Function<Persona,Persona> obtenerDatosPersonales = (Persona pPersona) -> {
         LOG.log(Level.INFO, "[PersonaCN][obtenerDatosPersonales] -> {0}", new Object[]{pPersona.getId()});
@@ -44,6 +44,6 @@ public class PersonaCN {
         return persona;
     };
 
-//    public void
+//    public void*/
 
 }

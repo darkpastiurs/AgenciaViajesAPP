@@ -19,7 +19,7 @@ import static java.util.logging.Level.INFO;
 
 public class ClienteCN {
 
-    private static final Logger LOG = Logger.getLogger("sv.edu.unab.agenciaviajes");
+    /*private static final Logger LOG = Logger.getLogger("sv.edu.unab.agenciaviajes");
 
     public Function<List<Filtro>, List<Cliente>> obtenerListadoClientes = (filtros) -> {
         LOG.log(INFO, "[ClienteCN][obtenerListadoClientes]");
@@ -56,7 +56,7 @@ public class ClienteCN {
             });
             sqlBuilder.add(")");
         }
-        try (Connection conn = new Conexion().getConexion();
+       /* try (Connection conn = new Conexion().getConexion();
              PreparedStatement pstmt = conn.prepareStatement(sqlBuilder.toString())) {
             if (filtros != null && !filtros.isEmpty()) {
                 AtomicInteger idx = new AtomicInteger(1);
@@ -187,6 +187,6 @@ public class ClienteCN {
         } catch (SQLException e) {
             LOG.log(Level.SEVERE, "[ClienteCN][eliminar][SQLException] -> ", e);
         }
-    };
+    };*/
 
 }

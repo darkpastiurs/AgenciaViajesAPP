@@ -126,9 +126,9 @@ public class FrmClienteGestion extends JDialog {
             cliente.setDatosPersonales(persona);
             long currentInit = System.currentTimeMillis();
             if(clienteSeleccionado != null){
-                clienteCI.actualizarCliente(cliente);
+//                clienteCI.actualizarCliente(cliente);
             } else {
-                clienteCI.registrarCliente(cliente);
+//                clienteCI.registrarCliente(cliente);
             }
             long currentFin = System.currentTimeMillis();
             long time = currentFin - currentInit;
