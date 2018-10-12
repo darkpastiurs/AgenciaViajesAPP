@@ -1,10 +1,30 @@
 package sv.edu.unab.dominio;
 
+import org.eclipse.persistence.annotations.CompositeMember;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.StringJoiner;
 
+@Entity
+@Table(schema = "avr", name = "clientes")
 public class Cliente {
 
+    @Id
     private Long id;
+    @Size(min = 9)
+    @Column(name = "pasaporte")
+    private String pasaporte;
+    @Size(min = 9)
+    @Column(name = "visa")
+    private String visa;
+    //Para mapear la relacion una a una con persona
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Persona.class)
+    //Esta atributo sirver para establecer que la misma id de la entidad de persona
+    @MapsId("id")
+    //Une el atributo id de cliente con el la columna idpersona en la base de datos
+    @JoinColumn(name = "idpersona")
     private Persona datosPersonales;
 
     public Cliente() {
@@ -16,6 +36,22 @@ public class Cliente {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPasaporte() {
+        return pasaporte;
+    }
+
+    public void setPasaporte(String pasaporte) {
+        this.pasaporte = pasaporte;
+    }
+
+    public String getVisa() {
+        return visa;
+    }
+
+    public void setVisa(String visa) {
+        this.visa = visa;
     }
 
     public Persona getDatosPersonales() {

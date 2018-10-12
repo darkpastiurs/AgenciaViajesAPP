@@ -7,13 +7,10 @@ import java.util.StringJoiner;
 
 @Entity
 @Table(schema = "avr", name = "empleados")
-@SequenceGenerator(schema = "avr", sequenceName = "empleados_seq_id", name = "Empleado_id_seq", allocationSize = 1)
 public class Empleado implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Empleado_id_seq")
-    @Column(name = "id")
     private Integer id;
     @NotNull
     @Column(name = "seguro")
@@ -22,8 +19,12 @@ public class Empleado implements Serializable {
     @Column(name = "afp")
     private String aFP;
 
+    //Para mapear la relacion una a una con persona
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Persona.class, optional = false)
-    @JoinColumn(name = "idpersona", referencedColumnName = "id", unique = true)
+    //Esta atributo sirver para establecer que la misma id de la entidad de persona
+    @MapsId("id")
+    //Une el atributo id de empleado con el la columna idpersona en la base de datos
+    @JoinColumn(name = "idpersona")
     private Persona datosPersonales;
 
     public Integer getId() {

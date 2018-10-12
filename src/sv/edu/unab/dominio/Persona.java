@@ -32,6 +32,9 @@ public class Persona implements Serializable {
     @Column(name = "apellidopaterno")
     private String apellidoPaterno;
     @NotNull
+    @Column(name = "genero")
+    private Character genero;
+    @NotNull
     @Column(name = "dui")
     private String dui;
     @NotNull
@@ -54,7 +57,15 @@ public class Persona implements Serializable {
     @Column(name = "email")
     private String email;
 
+    //Mapea la relacion con Cliente
+    @OneToOne(mappedBy = "datosPersonales", fetch = FetchType.LAZY, targetEntity = Cliente.class)
+    //Une id de la entidad persona para ser el mismo para la entidad cliente
+    @PrimaryKeyJoinColumn
+    private Cliente cliente;
+    //Mapea la relacion con Empleado
     @OneToOne(mappedBy = "datosPersonales", fetch = FetchType.LAZY, targetEntity = Empleado.class)
+    //Une id de la entidad persona ser el mismo para la entidad empleado
+    @PrimaryKeyJoinColumn
     private Empleado empleado;
 
     public Persona() {
@@ -94,6 +105,14 @@ public class Persona implements Serializable {
 
     public void setApellidoPaterno(String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public Character getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Character genero) {
+        this.genero = genero;
     }
 
     public String getDui() {
@@ -142,6 +161,22 @@ public class Persona implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 
     @Override
